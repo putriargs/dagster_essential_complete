@@ -45,3 +45,8 @@ dagster_home/
 
 # Project specific
 data/
+outputs/
+staging/
+
+# Exclude completed folder (added upon request)
+src/dagster_essentials/completed/

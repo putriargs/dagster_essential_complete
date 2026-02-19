@@ -1,0 +1,59 @@
+[project]
+name = "dagster-essentials"
+version = "0.0.1"
+description = "Dagster Essentials"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "dagster==1.12.4",
+    "dagster-dg-cli",
+    "dagster-webserver",
+    "dagster-cloud",
+    "dagster-duckdb",
+    "geopandas>=1.0.1,<1.1.0",
+    "pandas[parquet]",
+    "shapely>=2.0.0",
+    "matplotlib",
+    # Pin pyproj to a version that works better with Python 3.13
+    "pyproj>=3.7.0",
+    # numpy 2.1.0+ required for Python 3.13 compatibility (especially on Windows)
+    "numpy>=2.1.0; python_version>='3.13'",
+    "numpy>=1.26.0; python_version<'3.13'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest",
+]
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "pytest",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.dg]
+directory_type = "project"
+
+[tool.dg.project]
+root_module = "dagster_essentials"
+registry_modules = [
+    "dagster_essentials.components.*",
+]
+
+[tool.ruff.lint]
+ignore = [
+    "ERA001", # comments are fine for a learning environment
+    "E501",   # Line too long for docstrings
+    "F401",   # unused imports already caught by pylance
+]
+
+fixable = ["ALL"]
+unfixable = [
+    "F401", # dont remove unused imports
+]
